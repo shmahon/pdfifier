@@ -9,6 +9,12 @@ docker build -t theology-pdf .
 docker run --rm -v $(pwd):/work -w /work theology-pdf make pdf
 ```
 
+Or, with Docker Compose (builds the image and runs the render in one command):
+
+```bash
+docker compose run --rm pdf
+```
+
 The PDF is written to `output/sovereignty_teleology_master_FINAL.pdf`.
 
 ## Options
@@ -16,6 +22,7 @@ The PDF is written to `output/sovereignty_teleology_master_FINAL.pdf`.
 - Use another manuscript: `make docker-pdf INPUT=manuscript/other.md`
 - Run locally (without Docker, requires pandoc + TeX): `make pdf`
 - Clean outputs: `make clean`
+- With Docker Compose, override inputs on the fly: `INPUT=manuscript/other.md OUTPUT=output/other.pdf docker compose run --rm pdf`
 
 ## Pipeline pieces
 

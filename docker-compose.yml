@@ -1,0 +1,13 @@
+services:
+  pdf:
+    image: theology-pdf
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /work
+    volumes:
+      - .:/work
+    environment:
+      INPUT: ${INPUT:-manuscript/sovereignty_teleology_master_FINAL.md}
+      OUTPUT: ${OUTPUT:-output/sovereignty_teleology_master_FINAL.pdf}
+    command: ["make", "pdf", "INPUT=${INPUT:-manuscript/sovereignty_teleology_master_FINAL.md}", "OUTPUT=${OUTPUT:-output/sovereignty_teleology_master_FINAL.pdf}"]
