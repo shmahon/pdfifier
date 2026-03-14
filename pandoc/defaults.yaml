@@ -1,0 +1,21 @@
+from: markdown
+standalone: true
+pdf-engine: xelatex
+template: templates/academic_template.tex
+filters:
+  - filters/pandoc_filters.lua
+metadata-file: pandoc/metadata.yaml
+resource-path:
+  - manuscript
+  - .
+variables:
+  mainfont: Libertinus Serif
+  sansfont: Libertinus Sans
+  monofont: Libertinus Mono
+  greekfont: Gentium Plus
+  hebrewfont: SBL Hebrew
+  geometry: margin=1in
+  colorlinks: true
+  header-title: Teleological Redemption
+  footer-center: ""
+  header-rule: true

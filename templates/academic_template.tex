@@ -1,0 +1,98 @@
+\documentclass[11pt]{article}
+\usepackage{ifxetex,ifluatex}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{microtype}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{hyperref}
+\usepackage{longtable,booktabs}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable,listings}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+
+% Language and fonts
+\setmainlanguage{english}
+\setotherlanguage{greek}
+\setotherlanguage{hebrew}
+\setmainfont{$mainfont$}
+\setsansfont{$sansfont$}
+\setmonofont{$monofont$}
+\newfontfamily\greekfont{$greekfont$}
+\newfontfamily\hebrewfont{$hebrewfont$}
+
+% Geometry and spacing
+\geometry{$geometry$}
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{0em}
+\linespread{1.12}
+
+% Colors
+\definecolor{logicback}{HTML}{F5F5F5}
+\definecolor{logicframe}{HTML}{B0B0B0}
+\definecolor{contrastback}{HTML}{E6F2FF}
+\definecolor{contrastframe}{HTML}{6699CC}
+\definecolor{diagramback}{HTML}{FDF4E3}
+\definecolor{diagramframe}{HTML}{E0AD00}
+
+% Box environments for logic/contrast/diagram blocks
+\newtcolorbox{logicblock}{enhanced,breakable,sharp corners,arc=2pt,outer arc=2pt,boxrule=0.5pt,colback=logicback,colframe=logicframe,left=8pt,right=8pt,top=6pt,bottom=6pt,verbatim,fontupper=\ttfamily\small}
+\newtcolorbox{contrastblock}{enhanced,breakable,sharp corners,arc=2pt,outer arc=2pt,boxrule=0.6pt,colback=contrastback,colframe=contrastframe,left=8pt,right=8pt,top=6pt,bottom=6pt,verbatim,fontupper=\ttfamily\small}
+\newtcolorbox{diagramblock}{enhanced,breakable,sharp corners,arc=2pt,outer arc=2pt,boxrule=0.5pt,colback=diagramback,colframe=diagramframe,left=8pt,right=8pt,top=6pt,bottom=6pt,verbatim,fontupper=\ttfamily\small}
+
+% Heading styles
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{0.5em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+
+% Headers and footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\small $if(header-title)$$header-title$$endif$}
+\fancyhead[RE,LO]{\small $if(author)$$for(author)$$author.name$$sep$; $endfor$$endif$}
+\fancyfoot[CE,CO]{\small $if(footer-center)$$footer-center$$else$\thepage$endif$}
+\renewcommand{\headrulewidth}{$if(header-rule)$0.4$else$0$endif$pt}
+
+% Hyperref setup
+\hypersetup{
+  colorlinks=true,
+  linkcolor=MidnightBlue,
+  urlcolor=MidnightBlue,
+  citecolor=MidnightBlue,
+  pdfauthor={$for(author)$$author.name$$sep$, $endfor$},
+  pdftitle={$title$}
+}
+
+% Lists
+\setlist[itemize]{noitemsep,topsep=0pt}
+\setlist[enumerate]{noitemsep,topsep=0pt}
+
+% Title block
+\title{$title$\\[0.25em]\large $subtitle$}
+$if(author)$
+\author{$for(author)$$author.name$$sep$ \\ $endfor$}
+$endif$
+$if(date)$
+\date{$date$}
+$else$
+\date{}
+$endif$
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+\vspace{1em}
+
+$if(toc)$
+{\hypersetup{linkcolor=black}
+\tableofcontents
+\clearpage}
+$endif$
+
+$body$
+
+\end{document}

@@ -1,0 +1,7 @@
+output/*.pdf
+output/*.log
+output/*.aux
+output/*.out
+output/*.toc
+*.DS_Store
+*.tmp
