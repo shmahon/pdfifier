@@ -15,7 +15,7 @@ RUN apt-get update \
         texlive-lang-greek \
         texlive-lang-other \
         fonts-sil-gentiumplus \
-        fonts-sil-sblhebrew \
+        fonts-sil-sbl-hebrew \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 

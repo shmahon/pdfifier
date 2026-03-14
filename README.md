@@ -23,6 +23,7 @@ The PDF is written to `output/sovereignty_teleology_master_FINAL.pdf`.
 - Run locally (without Docker, requires pandoc + TeX): `make pdf`
 - Clean outputs: `make clean`
 - With Docker Compose, override inputs on the fly: `INPUT=manuscript/other.md OUTPUT=output/other.pdf docker compose run --rm pdf`
+- If a build fails early, re-run with verbose logs: `docker compose build --progress=plain --no-cache`
 
 ## Pipeline pieces
 
