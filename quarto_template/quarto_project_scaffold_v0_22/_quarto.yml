@@ -1,0 +1,25 @@
+project:
+  output-dir: output
+
+title: "Sovereignty, Teleology, and the Christian Life"
+subtitle: "Research Notebook (Working Draft)"
+author: ""
+date: "2026-03-15"
+
+format:
+  pdf:
+    pdf-engine: xelatex
+    documentclass: article
+    number-sections: true
+    toc: false
+    keep-tex: true
+    output-file: sovereignty_teleology.pdf
+    include-in-header:
+      - styles/academic-header.tex
+    filters:
+      - filters/semantic_blocks.lua
+
+execute:
+  enabled: false
+
+lang: en

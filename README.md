@@ -34,6 +34,52 @@ The PDF is written to `output/sovereignty_teleology_master_FINAL.pdf`.
 - `filters/pandoc_filters.lua` maps fenced code blocks with classes `text`, `logic`, `contrast`, or `diagram` into styled boxes.
 - Manuscript lives in `manuscript/`; PDFs land in `output/`.
 
+## Quarto Scaffold
+
+The reusable Quarto modular-project scaffold now lives outside the top-level `manuscript/` directory at `quarto_template/quarto_project_scaffold_v0_22/`.
+
+This is intentional:
+
+- top-level `manuscript/` is reserved for an actual paper project or legacy source manuscript
+- `scaffolds/` is an ignored drop zone for project zip files and temporary expansion workspaces
+- committed reusable template source lives under `quarto_template/`
+
+Project zip files for Quarto builds should also live in `scaffolds/`. If zip files are accidentally dropped into top-level `manuscript/`, run:
+
+```bash
+make move-quarto-zips
+```
+
+## Quarto Zip Builds
+
+Drop versioned project zips such as `sovereignty_quarto_modules_v0_23.zip` into `scaffolds/`, then build the latest versioned archive with:
+
+```bash
+make quarto-zip-pdf QUARTO_IMAGE=quarto-pdf
+```
+
+Or build a specific zip:
+
+```bash
+make quarto-zip-pdf QUARTO_IMAGE=quarto-pdf QUARTO_ZIP=scaffolds/sovereignty_quarto_modules_v0_22.zip
+```
+
+List discovered zip projects:
+
+```bash
+make quarto-zip-list
+```
+
+Attempt all discovered zip projects in version order:
+
+```bash
+make quarto-zip-pdf-all QUARTO_IMAGE=quarto-pdf
+```
+
+The build copies the reusable scaffold from `quarto_template/` into a temporary workspace named from the zip stem under ignored `scaffolds/`, unpacks the selected zip there, renders the PDF in Docker, and writes the result to top-level `output/<zip-stem>.pdf`.
+
+If a dropped zip still contains module YAML front matter or placeholder markers, the build will fail validation and no PDF will be produced for that archive.
+
 ## Styling logic blocks
 
 Fenced code blocks tagged in Markdown are rendered as follows:

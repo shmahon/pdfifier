@@ -14,6 +14,7 @@
 \usepackage{enumitem}
 \usepackage{fontspec}
 \usepackage{polyglossia}
+\usepackage[Latin,Greek,Hebrew]{ucharclasses}
 
 % Language and fonts
 \setmainlanguage{english}
@@ -24,6 +25,8 @@
 \setmonofont{$monofont$}
 \newfontfamily\greekfont{$greekfont$}
 \newfontfamily\hebrewfont{$hebrewfont$}
+\setTransitionsFor{Greek}{\begingroup\greekfont}{\endgroup}
+\setTransitionsFor{Hebrew}{\begingroup\hebrewfont}{\endgroup}
 
 % Geometry and spacing
 \geometry{$geometry$}
@@ -70,6 +73,8 @@
 % Lists
 \setlist[itemize]{noitemsep,topsep=0pt}
 \setlist[enumerate]{noitemsep,topsep=0pt}
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 % Title block
 \title{$title$\\[0.25em]\large $subtitle$}

@@ -9,11 +9,11 @@ resource-path:
   - manuscript
   - .
 variables:
-  mainfont: Libertinus Serif
-  sansfont: Libertinus Sans
-  monofont: Libertinus Mono
+  mainfont: DejaVu Serif
+  sansfont: DejaVu Sans
+  monofont: DejaVu Sans Mono
   greekfont: Gentium Plus
-  hebrewfont: SBL Hebrew
+  hebrewfont: Ezra SIL
   geometry: margin=1in
   colorlinks: true
   header-title: Teleological Redemption
