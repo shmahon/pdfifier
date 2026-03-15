@@ -133,6 +133,7 @@ Semantic block authoring rules:
 - `contrastblock` is for visible comparison/opposition and must not be authored as ordinary paragraph prose when the comparison layout matters.
 - If the desired PDF layout depends on stage hierarchy, indentation, or preserved vertical grouping, the manuscript must encode that explicitly with `hybriddiagram`.
 - If the desired PDF layout is left-to-right, encode the relation on one authored line instead of splitting the relation across lines.
+- Do not place a bare `=` underline on its own line inside a semantic block. Pandoc parses that as a Setext heading, which can produce numbered headings inside `contrastblock`.
 - Future sessions must not ask the renderer to infer layout semantics that are not present in the source block class and line structure.
 
 Examples:

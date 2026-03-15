@@ -70,6 +70,7 @@ Renderer-aware authoring constraints:
 - Do not split a left-to-right pair across lines unless the intended PDF result is hierarchical rather than inline.
 - Do not expect the PDF renderer to infer whether a block should become left-to-right, top-to-bottom, or hierarchical if the markdown source does not encode that choice explicitly.
 - When comparison structure matters rhetorically, use `contrastblock` rather than plain paragraphs.
+- Do not use a bare `=` underline on its own line inside semantic blocks, especially in `contrastblock`, because Pandoc will parse it as a numbered heading rather than comparison content.
 
 ## Narrative Architecture for Papers
 Typical structure:

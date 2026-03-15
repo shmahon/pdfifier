@@ -114,6 +114,8 @@ Rendering rules:
 - If an author wants a left-to-right display, the source markdown must encode that explicitly, typically by using `logicblock` and authoring the chain on one line.
 - If an author wants a mixed vertical-and-horizontal display, the source markdown must encode that explicitly by using `hybriddiagram`.
 - `contrastblock` should render as a visibly distinct comparison element rather than ordinary prose.
+- Inside semantic blocks, do not put a bare `=` underline on its own line beneath text. Pandoc interprets that as a Setext heading and can emit numbered headings inside the block.
+- In `contrastblock`, keep equation-like comparisons on one authored line, such as `salvation = forgiveness only`, rather than splitting the `=` onto its own line.
 
 ## Validation Rules
 
