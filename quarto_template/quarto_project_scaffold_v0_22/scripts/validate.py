@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MODULE_DIR = ROOT / "manuscript" / "modules"
 MASTER = ROOT / "manuscript" / "master.qmd"
 MANIFEST_PATH = MODULE_DIR / "MANIFEST.json"
-VALID_CLASSES = {"logicblock", "contrastblock", "structuraldiagram"}
+VALID_CLASSES = {"logicblock", "contrastblock", "structuraldiagram", "hybriddiagram"}
 PLACEHOLDER_PATTERNS = [
     "TODO",
     "TK",

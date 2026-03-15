@@ -68,24 +68,52 @@ Canonical source syntax is fenced Divs:
 instruction → equipping → participation in the work of ministry
 :::
 
-::: {.contrastblock}
-Distortion
-salvation = forgiveness only
-
-Instead of
-salvation = forgiveness + restored life
+::: {.structuraldiagram}
+creation
+↓
+fall
+↓
+redemption
+↓
+restored vocation
 :::
 
-::: {.structuraldiagram}
-creation → fall → redemption → restored vocation
+::: {.hybriddiagram}
+atonement
+→ purified conscience
+
+↓
+service to the living God
+
+↓
+draw near
+hold fast
+stir up love and good works
+:::
+
+::: {.contrastblock}
+**Distortion**
+
+salvation = forgiveness only
+
+**Instead of**
+
+salvation = forgiveness + restored life
 :::
 ```
 
 Rendering rules:
 
-- `logicblock`, `contrastblock`, and `structuraldiagram` must all render in PDF.
+- `logicblock`, `contrastblock`, `structuraldiagram`, and `hybriddiagram` must all render in PDF.
 - Legacy fenced code block classes may be tolerated for backward compatibility, but new authoring should use fenced Divs.
 - Validation must fail on unbalanced semantic block fences or invalid semantic class names.
+- `logicblock` is for compact left-to-right logical chains and inline progression displays.
+- `structuraldiagram` is for true top-to-bottom or vertically staged flow and must preserve authorial line breaks exactly as written.
+- `hybriddiagram` is for mixed orientation blocks where short left-to-right transitions occur within a broader top-to-bottom sequence.
+- The renderer must not guess that a `structuraldiagram` should become left-to-right based on content alone.
+- If an author wants a left-to-right display, the source markdown must encode that explicitly, typically by using `logicblock` and authoring the chain on one line.
+- If an author wants a mixed vertical-and-horizontal display, the source markdown must encode that explicitly by using `hybriddiagram`.
+- `contrastblock` should render as a visibly distinct comparison element rather than ordinary prose.
 
 ## Validation Rules
 
@@ -165,3 +193,38 @@ Output contract:
 - Do not move metadata ownership out of `_quarto.yml`.
 - Do not convert the article scaffold into a Quarto book.
 - Treat this file as a structural constraint source intended to be merged with other project-specific constraints.
+
+
+
+### Renderer Requirement (Hybrid Flow Support)
+
+The PDF renderer **must implement explicit support for the `hybriddiagram` semantic block**.
+
+Implementation rule:
+
+- Preserve author‑written line breaks exactly.
+- Render vertical stages top‑to‑bottom.
+- Render short horizontal transitions exactly where the `→` arrow appears.
+- Do **not** collapse the block into a paragraph or reflow it left‑to‑right automatically.
+
+Example expected rendering model:
+
+::: {.hybriddiagram}
+atonement
+→ purified conscience
+
+↓
+service to the living God
+
+↓
+draw near
+hold fast
+stir up love and good works
+:::
+
+The renderer must treat this block as a **structured visual element**, not prose.
+
+Failure condition:
+
+If a `hybriddiagram` block is rendered as normal text or flattened flow,
+the build should be considered **non‑conformant to the pipeline specification**.
