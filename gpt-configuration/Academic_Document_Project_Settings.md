@@ -82,6 +82,8 @@ Rules:
 
 # Semantic Block System
 
+All renderer-sensitive visual structures must be authored using the semantic block syntax expected by the Quarto PDF pipeline. Do not invent ad hoc markdown layouts when one of the supported semantic block classes applies.
+
 logicblock
 
 ::: {.logicblock}
@@ -101,8 +103,96 @@ salvation = forgiveness + restored life
 structuraldiagram
 
 ::: {.structuraldiagram}
-creation → fall → redemption → restored vocation
+creation
+↓
+fall
+↓
+redemption
+↓
+restored vocation
 :::
+
+hybriddiagram
+
+::: {.hybriddiagram}
+creation purpose
+→ humanity created for God's glory
+
+fall
+→ corruption and bondage
+
+redemption
+→ justification through Christ
+:::
+
+Semantic block authoring rules:
+
+- `logicblock` is only for compact left-to-right chains that should render on one logical line or as tightly grouped horizontal progression.
+- `structuraldiagram` is only for true top-to-bottom flow. It preserves authored line breaks and should not be used when a stage label must govern an indented arrow line beneath it.
+- `hybriddiagram` is for staged hierarchical flow where each stage may contain a subordinate arrow line or subordinate lines beneath the label.
+- `contrastblock` is for visible comparison/opposition and must not be authored as ordinary paragraph prose when the comparison layout matters.
+- If the desired PDF layout depends on stage hierarchy, indentation, or preserved vertical grouping, the manuscript must encode that explicitly with `hybriddiagram`.
+- If the desired PDF layout is left-to-right, encode the relation on one authored line instead of splitting the relation across lines.
+- Future sessions must not ask the renderer to infer layout semantics that are not present in the source block class and line structure.
+
+Examples:
+
+Left-to-right chain:
+
+```markdown
+::: {.logicblock}
+instruction → equipping → participation in the work of ministry
+:::
+```
+
+Vertical staged flow:
+
+```markdown
+::: {.structuraldiagram}
+creation
+↓
+fall
+↓
+redemption
+↓
+restored vocation
+:::
+```
+
+Hierarchical mixed flow:
+
+```markdown
+::: {.hybriddiagram}
+creation purpose
+→ humanity created for God's glory
+
+fall
+→ corruption and bondage
+
+redemption
+→ justification through Christ
+
+restored life
+→ walking in newness of life
+
+final restoration
+→ liberation of creation from futility
+:::
+```
+
+Comparison block:
+
+```markdown
+::: {.contrastblock}
+**Distortion**
+
+salvation = forgiveness only
+
+**Instead of**
+
+salvation = forgiveness + restored life
+:::
+```
 
 ---
 
@@ -191,3 +281,4 @@ Future editing sessions must:
 - not move metadata from `_quarto.yml`
 - not convert article projects into Quarto books
 - not alter font pipeline without explicit instruction
+- not treat renderer-visible block layout as a styling afterthought; the correct semantic block syntax must be authored in the manuscript source

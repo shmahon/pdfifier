@@ -31,6 +31,7 @@ This instructs the assistant to:
 - generate Quarto‑compatible modules
 - maintain multilingual typography
 - produce versioned manuscript builds
+- author semantic blocks using the exact syntax expected by the PDF renderer
 
 ---
 
@@ -68,6 +69,21 @@ Controls:
 - rendering pipeline
 - validation rules
 - PDF generation
+
+It also controls renderer-aware source syntax for any manuscript feature whose final appearance depends on the Quarto-to-LaTeX pipeline.
+
+## Renderer-Aware Authoring Rule
+
+If a future session needs a block, diagram, comparison, or other visually distinct structure to render correctly in PDF, it must choose from the semantic block classes already supported by the pipeline and author the source accordingly.
+
+Use:
+
+- `logicblock` for left-to-right chains authored on one line
+- `structuraldiagram` for true top-to-bottom flow
+- `hybriddiagram` for staged hierarchical blocks with subordinate arrow lines or mixed vertical/horizontal progression
+- `contrastblock` for visible comparison blocks
+
+Do not rely on plain paragraphs, ad hoc indentation, or “the renderer will figure it out later” authoring. The pipeline expects explicit semantic block syntax.
 
 ---
 
@@ -122,3 +138,5 @@ Then activate them in future sessions with:
 Use Academic Document Project Settings.
 Use Biblical Studies Authoring Style.
 Use Biblical Research Notebook Framework.
+
+If the session will draft or revise Quarto manuscript modules, it should also be told to follow the semantic block syntax required by the PDF pipeline, especially when authoring diagrams, logical chains, or comparison blocks.
