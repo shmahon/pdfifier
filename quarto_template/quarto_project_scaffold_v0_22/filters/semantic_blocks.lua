@@ -77,6 +77,7 @@ end
 
 local function render_hybrid_block(el)
   local parts = { "\\begin{hybriddiagram}" }
+  local after_divider = false
 
   for _, block in ipairs(el.content) do
     if block.t == "Para" or block.t == "Plain" then
@@ -88,8 +89,14 @@ local function render_hybrid_block(el)
 
         if text == "↓" then
           table.insert(parts, string.format("\\hybriddivider{%s}", latex))
+          after_divider = true
         else
-          table.insert(parts, string.format("\\hybridlabel{%s}", latex))
+          if after_divider then
+            table.insert(parts, string.format("\\hybridnode{%s}", latex))
+          else
+            table.insert(parts, string.format("\\hybridlabel{%s}", latex))
+          end
+          after_divider = false
         end
       elseif #lines > 1 then
         local label = latex_for_inlines(lines[1])
@@ -100,9 +107,11 @@ local function render_hybrid_block(el)
         end
 
         table.insert(parts, string.format("\\hybridstage{%s}{%s}", label, table.concat(details, " \\\\ ")))
+        after_divider = false
       end
     else
       table.insert(parts, latex_for_blocks({ block }))
+      after_divider = false
     end
   end
 
