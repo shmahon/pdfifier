@@ -2,20 +2,45 @@
 
 This repo turns a Markdown manuscript into a publication-quality PDF using Pandoc + XeLaTeX inside Docker. The default input is `manuscript/sovereignty_teleology_master_FINAL.md`.
 
-## Quick start
+## Quick Start
+
+This repository supports two build flows:
+
+- a simple top-level Markdown manuscript build through Pandoc
+- a Quarto modular-project zip build from `scaffolds/`
+
+### Quick Start: Simple Markdown Manuscript
+
+Build the legacy top-level manuscript with Docker:
 
 ```bash
 docker build -t theology-pdf .
 docker run --rm -v $(pwd):/work -w /work theology-pdf make pdf
 ```
 
-Or, with Docker Compose (builds the image and runs the render in one command):
+Or, with Docker Compose:
 
 ```bash
 docker compose run --rm pdf
 ```
 
-The PDF is written to `output/sovereignty_teleology_master_FINAL.pdf`.
+The default PDF is written to `output/sovereignty_teleology_master_FINAL.pdf`.
+
+### Quick Start: Latest Quarto Zip in `scaffolds/`
+
+Build the latest versioned project zip currently in `scaffolds/`:
+
+```bash
+python3 scripts/build_quarto_zip_project.py --zip scaffolds/sovereignty_quarto_modules_v0_29.zip --image quarto-pdf
+```
+
+Equivalent `make` entrypoint:
+
+```bash
+make quarto-zip-pdf QUARTO_IMAGE=quarto-pdf QUARTO_ZIP=scaffolds/sovereignty_quarto_modules_v0_29.zip
+```
+
+The rendered PDF is written to `output/sovereignty_quarto_modules_v0_29.pdf`.
 
 ## Options
 
